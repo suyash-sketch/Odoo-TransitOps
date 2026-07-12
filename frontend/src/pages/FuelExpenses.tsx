@@ -117,10 +117,10 @@ export default function FuelExpenses() {
   }, [fuelLogs, otherExpenses]);
 
   return (
-    <div className="flex flex-col h-full overflow-y-auto max-w-[1200px] mx-auto gap-6 pb-12">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       
-      {/* Page Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between shrink-0 animate-fade-in pt-2">
+      {/* Page Title + Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 animate-fade-in mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Fuel & Expenses
@@ -131,105 +131,97 @@ export default function FuelExpenses() {
         </div>
       </div>
 
-      {/* SECTION 1 - Fuel Logs */}
-      <div className="flex flex-col glass-panel animate-fade-in shadow-sm" style={{ animationDelay: '50ms' }}>
-        <div className="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl flex items-center justify-between">
-          <h2 className="text-lg font-bold text-slate-800">Fuel Logs</h2>
+      {/* Action Bar */}
+      <div className="glass-panel p-6 lg:p-8 flex flex-col sm:flex-row gap-6 justify-between items-center shrink-0 animate-fade-in mb-6" style={{ animationDelay: '50ms' }}>
+        <h2 className="text-lg font-bold text-slate-800">Quick Actions</h2>
+        <div className="flex gap-4">
           <button
             onClick={() => setIsFuelModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-accent text-white rounded-md text-xs font-medium hover:bg-accent-hover transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-4 py-2 bg-accent text-white rounded-lg text-sm font-bold hover:bg-accent-hover transition-colors shadow-sm"
           >
-            <Plus size={14} /> Log Fuel
+            <Plus size={16} /> Log Fuel
           </button>
-        </div>
-        
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm whitespace-nowrap">
-            <thead className="bg-slate-50/95 border-b border-slate-200 text-slate-500 font-medium">
-              <tr>
-                <th className="px-6 py-4 font-semibold">Vehicle</th>
-                <th className="px-6 py-4 font-semibold">Date</th>
-                <th className="px-6 py-4 font-semibold text-right">Liters</th>
-                <th className="px-6 py-4 font-semibold text-right">Fuel Cost</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {fuelLogs.map((log, idx) => (
-                <tr key={idx} className="hover:bg-slate-50/80 transition-colors group">
-                  <td className="px-6 py-4 font-medium text-slate-800">{log.vehicle}</td>
-                  <td className="px-6 py-4 text-slate-600">{log.date}</td>
-                  <td className="px-6 py-4 text-slate-600 text-right">{log.liters}</td>
-                  <td className="px-6 py-4 text-slate-600 text-right font-medium">₹{log.fuel_cost}</td>
-                </tr>
-              ))}
-              {fuelLogs.length === 0 && (
-                <tr>
-                  <td colSpan={4} className="px-6 py-12 text-center text-slate-400">
-                    No fuel logs found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* SECTION 2 - Other Expenses */}
-      <div className="flex flex-col glass-panel animate-fade-in shadow-sm" style={{ animationDelay: '100ms' }}>
-        <div className="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl flex items-center justify-between">
-          <h2 className="text-lg font-bold text-slate-800">Other Expenses (Toll / Misc)</h2>
           <button
             onClick={() => setIsExpenseModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-accent text-white rounded-md text-xs font-medium hover:bg-accent-hover transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-4 py-2 bg-white text-slate-800 border-2 border-slate-200 rounded-lg text-sm font-bold hover:border-slate-300 hover:bg-slate-50 transition-colors shadow-sm"
           >
-            <Plus size={14} /> Add Expense
+            <Plus size={16} /> Add Expense
           </button>
-        </div>
-        
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm whitespace-nowrap">
-            <thead className="bg-slate-50/95 border-b border-slate-200 text-slate-500 font-medium">
-              <tr>
-                <th className="px-6 py-4 font-semibold">Trip</th>
-                <th className="px-6 py-4 font-semibold">Vehicle</th>
-                <th className="px-6 py-4 font-semibold text-right">Toll</th>
-                <th className="px-6 py-4 font-semibold text-right">Other</th>
-                <th className="px-6 py-4 font-semibold text-right">Maint. (Linked)</th>
-                <th className="px-6 py-4 font-semibold text-right">Total</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {otherExpenses.map((exp, idx) => {
-                const rowTotal = parseNum(exp.toll) + parseNum(exp.other) + parseNum(exp.maint_linked);
-                return (
-                  <tr key={idx} className="hover:bg-slate-50/80 transition-colors group">
-                    <td className="px-6 py-4 font-medium text-slate-800">{exp.trip}</td>
-                    <td className="px-6 py-4 text-slate-600">{exp.vehicle}</td>
-                    <td className="px-6 py-4 text-slate-600 text-right">₹{exp.toll}</td>
-                    <td className="px-6 py-4 text-slate-600 text-right">₹{exp.other}</td>
-                    <td className="px-6 py-4 text-slate-600 text-right">₹{exp.maint_linked}</td>
-                    <td className="px-6 py-4 text-right">
-                      <span className={`inline-flex items-center justify-center px-2.5 py-1 text-xs font-bold rounded-full border ${getStatusColor(exp.total_status)}`}>
-                        ₹{rowTotal.toLocaleString()}
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-              {otherExpenses.length === 0 && (
-                <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-slate-400">
-                    No other expenses found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
         </div>
       </div>
 
-      {/* SECTION 3 - Summary line */}
-      <div className="glass-panel p-5 flex items-center justify-between bg-slate-800 border-slate-700 shadow-md animate-fade-in" style={{ animationDelay: '150ms' }}>
+      <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-8">
+        
+        {/* LEFT COLUMN - Fuel Logs Table */}
+        <div className="flex-[2] flex flex-col glass-panel overflow-hidden animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <div className="p-5 lg:p-6 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0 flex justify-between items-center">
+            <h2 className="text-lg font-bold text-slate-800">Fuel Logs</h2>
+          </div>
+          <div className="flex-1 overflow-auto">
+            <table className="w-full text-left text-sm whitespace-nowrap">
+              <thead className="sticky top-0 bg-slate-50/95 backdrop-blur z-10 border-b border-slate-200 text-slate-500 font-medium">
+                <tr>
+                  <th className="px-8 py-5 font-semibold">Date</th>
+                  <th className="px-8 py-5 font-semibold">Vehicle</th>
+                  <th className="px-8 py-5 font-semibold text-right">Liters</th>
+                  <th className="px-8 py-5 font-semibold text-right">Cost (₹)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {fuelLogs.map((log, idx) => (
+                  <tr key={idx} className="hover:bg-slate-50/80 transition-colors group">
+                    <td className="px-8 py-5 text-slate-600">{log.date}</td>
+                    <td className="px-8 py-5 font-medium text-slate-800">{log.vehicle}</td>
+                    <td className="px-8 py-5 text-slate-600 text-right tabular-nums">{log.liters}</td>
+                    <td className="px-8 py-5 text-slate-600 text-right tabular-nums font-medium">₹{log.fuel_cost}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN - Other Expenses Table */}
+        <div className="flex-[3] flex flex-col glass-panel overflow-hidden animate-fade-in" style={{ animationDelay: '150ms' }}>
+          <div className="p-5 lg:p-6 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0 flex justify-between items-center">
+            <h2 className="text-lg font-bold text-slate-800">Other Expenses</h2>
+          </div>
+          <div className="flex-1 overflow-auto">
+            <table className="w-full text-left text-sm whitespace-nowrap">
+              <thead className="sticky top-0 bg-slate-50/95 backdrop-blur z-10 border-b border-slate-200 text-slate-500 font-medium">
+                <tr>
+                  <th className="px-8 py-5 font-semibold">Trip / Ref</th>
+                  <th className="px-8 py-5 font-semibold text-right">Toll</th>
+                  <th className="px-8 py-5 font-semibold text-right">Maint. Linked</th>
+                  <th className="px-8 py-5 font-semibold text-right">Misc</th>
+                  <th className="px-8 py-5 font-semibold text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {otherExpenses.map((exp, idx) => {
+                  const rowTotal = parseNum(exp.toll) + parseNum(exp.other) + parseNum(exp.maint_linked);
+                  return (
+                    <tr key={idx} className="hover:bg-slate-50/80 transition-colors group">
+                      <td className="px-8 py-5 font-medium text-slate-800">{exp.trip}</td>
+                      <td className="px-8 py-5 text-slate-600 text-right tabular-nums">₹{exp.toll}</td>
+                      <td className="px-8 py-5 text-slate-600 text-right tabular-nums">₹{exp.maint_linked}</td>
+                      <td className="px-8 py-5 text-slate-600 text-right tabular-nums">₹{exp.other}</td>
+                      <td className="px-8 py-5 text-right">
+                        <span className={`inline-flex items-center justify-center px-3 py-1 text-xs font-bold rounded-full border ${getStatusColor(exp.total_status)}`}>
+                          ₹{rowTotal.toLocaleString()}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Cost Summary Banner */}
+      <div className="glass-panel p-6 lg:p-8 flex items-center justify-between bg-slate-800 border-slate-700 shadow-md animate-fade-in shrink-0" style={{ animationDelay: '200ms' }}>
         <div className="text-sm font-semibold text-slate-300">
           Total Operational Cost (Auto) = Fuel + Maint.
         </div>

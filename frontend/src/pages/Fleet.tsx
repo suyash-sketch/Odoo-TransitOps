@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
-import { Search, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
+import SearchInput from "../components/SearchInput";
 
 type VehicleStatus = "Available" | "On Trip" | "In Shop" | "Retired";
 
@@ -78,9 +79,9 @@ export default function Fleet() {
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden max-w-[1600px] mx-auto gap-4 lg:gap-6">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       {/* Page Title + Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0 animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 animate-fade-in mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Fleet
@@ -92,19 +93,14 @@ export default function Fleet() {
       </div>
 
       {/* Filter Row */}
-      <div className="glass-panel p-4 flex flex-col md:flex-row gap-4 justify-between items-center shrink-0 animate-fade-in" style={{ animationDelay: '50ms' }}>
-        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+      <div className="glass-panel p-6 lg:p-8 flex flex-col md:flex-row gap-6 justify-between items-center shrink-0 animate-fade-in mb-6" style={{ animationDelay: '50ms' }}>
+        <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
           {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input
-              type="text"
-              placeholder="Search Reg No..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-4 py-2 bg-slate-50/50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent w-full sm:w-64 transition-all"
-            />
-          </div>
+          <SearchInput 
+            placeholder="Search Reg No..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
           {/* Type Dropdown */}
           <select
@@ -148,25 +144,25 @@ export default function Fleet() {
           <table className="w-full text-left text-sm whitespace-nowrap">
             <thead className="sticky top-0 bg-slate-50/95 backdrop-blur z-10 border-b border-slate-200 text-slate-500 font-medium">
               <tr>
-                <th className="px-6 py-4 font-semibold">Registration No.</th>
-                <th className="px-6 py-4 font-semibold">Name/Model</th>
-                <th className="px-6 py-4 font-semibold">Type</th>
-                <th className="px-6 py-4 font-semibold">Capacity</th>
-                <th className="px-6 py-4 font-semibold text-right">Odometer</th>
-                <th className="px-6 py-4 font-semibold text-right">Acquisition Cost</th>
-                <th className="px-6 py-4 font-semibold text-center">Status</th>
+                <th className="px-8 py-5 font-semibold">Registration No.</th>
+                <th className="px-8 py-5 font-semibold">Name/Model</th>
+                <th className="px-8 py-5 font-semibold">Type</th>
+                <th className="px-8 py-5 font-semibold">Capacity</th>
+                <th className="px-8 py-5 font-semibold text-right">Odometer</th>
+                <th className="px-8 py-5 font-semibold text-right">Acquisition Cost</th>
+                <th className="px-8 py-5 font-semibold text-center">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               {filteredVehicles.map((vehicle, idx) => (
                 <tr key={vehicle.registration_number} className="hover:bg-slate-50/80 transition-colors group">
-                  <td className="px-6 py-4 font-medium text-slate-800">{vehicle.registration_number}</td>
-                  <td className="px-6 py-4 text-slate-600">{vehicle.name_model}</td>
-                  <td className="px-6 py-4 text-slate-600">{vehicle.type}</td>
-                  <td className="px-6 py-4 text-slate-600">{vehicle.max_load_capacity}</td>
-                  <td className="px-6 py-4 text-slate-600 text-right tabular-nums">{vehicle.odometer}</td>
-                  <td className="px-6 py-4 text-slate-600 text-right tabular-nums">₹{vehicle.acquisition_cost}</td>
-                  <td className="px-6 py-4 text-center">
+                  <td className="px-8 py-5 font-medium text-slate-800">{vehicle.registration_number}</td>
+                  <td className="px-8 py-5 text-slate-600">{vehicle.name_model}</td>
+                  <td className="px-8 py-5 text-slate-600">{vehicle.type}</td>
+                  <td className="px-8 py-5 text-slate-600">{vehicle.max_load_capacity}</td>
+                  <td className="px-8 py-5 text-slate-600 text-right tabular-nums">{vehicle.odometer}</td>
+                  <td className="px-8 py-5 text-slate-600 text-right tabular-nums">₹{vehicle.acquisition_cost}</td>
+                  <td className="px-8 py-5 text-center">
                     <span className={`inline-flex items-center justify-center px-2.5 py-1 text-xs font-semibold rounded-full border ${getStatusColor(vehicle.status)}`}>
                       {vehicle.status}
                     </span>
@@ -175,7 +171,7 @@ export default function Fleet() {
               ))}
               {filteredVehicles.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-slate-400">
+                  <td colSpan={7} className="px-8 py-12 text-center text-slate-400">
                     No vehicles found matching the filters.
                   </td>
                 </tr>

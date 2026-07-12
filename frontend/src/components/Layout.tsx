@@ -9,8 +9,10 @@ import {
   BarChart3,
   Settings,
   Search,
+  Shield,
 } from "lucide-react";
 import type { ReactNode } from "react";
+import { useAuthStore } from "../stores/authStore";
 
 /* ─── Nav Config ─── */
 interface NavItem {
@@ -34,6 +36,17 @@ const teamAvatars = ["AK", "JP", "SM"];
 
 /* ─── Layout Component ─── */
 export default function Layout() {
+  const user = useAuthStore((s) => s.user);
+
+  const visibleNavItems = [...navItems];
+  if (user?.role === "admin") {
+    visibleNavItems.push({
+      label: "User Management",
+      path: "/user-management",
+      icon: <Shield size={18} />
+    });
+  }
+
   return (
     <div className="flex h-screen overflow-hidden bg-slate-50">
       {/* ── Sidebar (Light, Docked) ── */}
@@ -53,12 +66,12 @@ export default function Layout() {
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto px-4 pb-6 mt-4">
-          <ul className="flex flex-col gap-3">
-            {navItems.map((item) => (
+          <ul className="flex flex-col gap-4">
+            {visibleNavItems.map((item) => (
               <li key={item.path}>
                 <NavLink
                   to={item.path}
-                  className="group flex items-center gap-4 py-3 px-4 mb-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                  className="group flex items-center gap-4 py-3.5 px-5 mb-3 rounded-xl text-sm font-semibold transition-all duration-200"
                   style={({ isActive }) => ({
                     color: isActive ? "var(--accent)" : "#475569", // slate-600
                     background: isActive ? "var(--accent-subtle)" : "transparent",
@@ -110,7 +123,7 @@ export default function Layout() {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-hidden p-6 lg:p-8">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto p-6 lg:p-8 pr-6 lg:pr-8">
           <Outlet />
         </main>
       </div>

@@ -75,9 +75,9 @@ const kpiCards: KpiCardData[] = [
 /* ─── Dashboard Page ─── */
 export default function Dashboard() {
   return (
-    <div className="flex flex-col h-full overflow-hidden max-w-[1600px] mx-auto gap-4 lg:gap-6">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       {/* Page Title + Filters (Shrink to fit) */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Dashboard
@@ -90,7 +90,7 @@ export default function Dashboard() {
       </div>
 
       {/* KPI Cards Grid (Shrink to fit) */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 shrink-0">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6 shrink-0 mb-6">
         {kpiCards.map((card, i) => (
           <div key={card.label} style={{ animationDelay: `${i * 40}ms` }} className="h-full">
             <KpiCard data={card} />

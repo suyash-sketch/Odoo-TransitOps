@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Maintenance from "./pages/Maintenance";
 import Settings from "./pages/Settings";
 import Trips from "./pages/Trips";
+import UserManagement from "./pages/UserManagement";
 import { useAuthStore } from "./stores/authStore";
 
 function RequireAuth() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/fuel-expenses" element={<FuelExpenses />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/user-management" element={<UserManagement />} />
         </Route>
       </Route>
     </Routes>

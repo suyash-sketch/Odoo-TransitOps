@@ -62,9 +62,9 @@ export default function Maintenance() {
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden max-w-[1600px] mx-auto gap-4 lg:gap-6">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       {/* Page Title + Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0 animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 animate-fade-in mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Maintenance
@@ -78,8 +78,8 @@ export default function Maintenance() {
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-6">
         
         {/* LEFT COLUMN - Log Service Record form card */}
-        <div className="flex-1 lg:max-w-md flex flex-col gap-4 animate-fade-in" style={{ animationDelay: '50ms' }}>
-          <div className="glass-panel p-6 flex flex-col shadow-sm">
+        <div className="flex-1 lg:max-w-md flex flex-col gap-6 animate-fade-in" style={{ animationDelay: '50ms' }}>
+          <div className="glass-panel p-6 lg:p-8 flex flex-col shadow-sm">
             
             <h2 className="text-lg font-bold text-slate-800 mb-5">Log Service Record</h2>
             
@@ -176,7 +176,7 @@ export default function Maintenance() {
         {/* RIGHT COLUMN - Service Log table */}
         <div className="flex-[2] flex flex-col glass-panel overflow-hidden animate-fade-in" style={{ animationDelay: '100ms' }}>
           
-          <div className="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0">
+          <div className="p-5 lg:p-6 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0">
             <h2 className="text-lg font-bold text-slate-800">Service Log</h2>
           </div>
           
@@ -184,19 +184,19 @@ export default function Maintenance() {
             <table className="w-full text-left text-sm whitespace-nowrap">
               <thead className="sticky top-0 bg-slate-50/95 backdrop-blur z-10 border-b border-slate-200 text-slate-500 font-medium">
                 <tr>
-                  <th className="px-6 py-4 font-semibold">Vehicle</th>
-                  <th className="px-6 py-4 font-semibold">Service</th>
-                  <th className="px-6 py-4 font-semibold text-right">Cost</th>
-                  <th className="px-6 py-4 font-semibold text-center">Status</th>
+                  <th className="px-8 py-5 font-semibold">Vehicle</th>
+                  <th className="px-8 py-5 font-semibold">Service</th>
+                  <th className="px-8 py-5 font-semibold text-right">Cost</th>
+                  <th className="px-8 py-5 font-semibold text-center">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {records.map((record, idx) => (
                   <tr key={idx} className="hover:bg-slate-50/80 transition-colors group">
-                    <td className="px-6 py-4 font-medium text-slate-800">{record.vehicle}</td>
-                    <td className="px-6 py-4 text-slate-600">{record.service}</td>
-                    <td className="px-6 py-4 text-slate-600 text-right tabular-nums">₹{record.cost}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-8 py-5 font-medium text-slate-800">{record.vehicle}</td>
+                    <td className="px-8 py-5 text-slate-600">{record.service}</td>
+                    <td className="px-8 py-5 text-slate-600 text-right tabular-nums">₹{record.cost}</td>
+                    <td className="px-8 py-5 text-center">
                       <span className={`inline-flex items-center justify-center px-2.5 py-1 text-xs font-semibold rounded-full border ${getStatusColor(record.status)}`}>
                         {record.status}
                       </span>
@@ -205,7 +205,7 @@ export default function Maintenance() {
                 ))}
                 {records.length === 0 && (
                   <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-slate-400">
+                    <td colSpan={4} className="px-8 py-12 text-center text-slate-400">
                       No service records found.
                     </td>
                   </tr>

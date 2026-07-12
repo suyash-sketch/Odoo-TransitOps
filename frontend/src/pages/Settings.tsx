@@ -35,10 +35,10 @@ export default function Settings() {
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden max-w-[1600px] mx-auto gap-4 lg:gap-6">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       
       {/* Page Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0 animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 animate-fade-in mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Settings
@@ -52,8 +52,8 @@ export default function Settings() {
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-6">
         
         {/* LEFT COLUMN - General Settings */}
-        <div className="flex-1 lg:max-w-md flex flex-col gap-4 animate-fade-in" style={{ animationDelay: '50ms' }}>
-          <div className="glass-panel p-6 flex flex-col shadow-sm h-full">
+        <div className="flex-1 lg:max-w-md flex flex-col gap-6 animate-fade-in" style={{ animationDelay: '50ms' }}>
+          <div className="glass-panel p-6 lg:p-8 flex flex-col shadow-sm h-full">
             <h2 className="text-lg font-bold text-slate-800 mb-6 border-b border-slate-100 pb-4">General</h2>
             
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 flex-1">
@@ -104,7 +104,7 @@ export default function Settings() {
         {/* RIGHT COLUMN - RBAC Table */}
         <div className="flex-[2.5] flex flex-col glass-panel overflow-hidden animate-fade-in" style={{ animationDelay: '100ms' }}>
           
-          <div className="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0">
+          <div className="p-5 lg:p-6 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0">
             <h2 className="text-lg font-bold text-slate-800">Role-Based Access (RBAC)</h2>
           </div>
           
@@ -112,25 +112,25 @@ export default function Settings() {
             <table className="w-full text-left text-sm whitespace-nowrap">
               <thead className="bg-slate-50/95 border-b border-slate-200 text-slate-500 font-medium">
                 <tr>
-                  <th className="px-6 py-4 font-semibold">Role</th>
-                  <th className="px-6 py-4 font-semibold">Vehicles</th>
-                  <th className="px-6 py-4 font-semibold">Drivers</th>
-                  <th className="px-6 py-4 font-semibold">Trips</th>
-                  <th className="px-6 py-4 font-semibold">Maintenance</th>
-                  <th className="px-6 py-4 font-semibold">Fuel/Exp.</th>
-                  <th className="px-6 py-4 font-semibold">Analytics</th>
+                  <th className="px-8 py-5 font-semibold">Role</th>
+                  <th className="px-8 py-5 font-semibold">Vehicles</th>
+                  <th className="px-8 py-5 font-semibold">Drivers</th>
+                  <th className="px-8 py-5 font-semibold">Trips</th>
+                  <th className="px-8 py-5 font-semibold">Maintenance</th>
+                  <th className="px-8 py-5 font-semibold">Fuel/Exp.</th>
+                  <th className="px-8 py-5 font-semibold">Analytics</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {rbacData.map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-50/80 transition-colors group">
-                    <td className="px-6 py-4 font-bold text-slate-800">{row.role}</td>
-                    <td className={`px-6 py-4 ${getPermissionStyle(row.vehicles)}`}>{row.vehicles}</td>
-                    <td className={`px-6 py-4 ${getPermissionStyle(row.drivers)}`}>{row.drivers}</td>
-                    <td className={`px-6 py-4 ${getPermissionStyle(row.trips)}`}>{row.trips}</td>
-                    <td className={`px-6 py-4 ${getPermissionStyle(row.maintenance)}`}>{row.maintenance}</td>
-                    <td className={`px-6 py-4 ${getPermissionStyle(row.fuel_exp)}`}>{row.fuel_exp}</td>
-                    <td className={`px-6 py-4 ${getPermissionStyle(row.analytics)}`}>{row.analytics}</td>
+                    <td className="px-8 py-5 font-bold text-slate-800">{row.role}</td>
+                    <td className={`px-8 py-5 ${getPermissionStyle(row.vehicles)}`}>{row.vehicles}</td>
+                    <td className={`px-8 py-5 ${getPermissionStyle(row.drivers)}`}>{row.drivers}</td>
+                    <td className={`px-8 py-5 ${getPermissionStyle(row.trips)}`}>{row.trips}</td>
+                    <td className={`px-8 py-5 ${getPermissionStyle(row.maintenance)}`}>{row.maintenance}</td>
+                    <td className={`px-8 py-5 ${getPermissionStyle(row.fuel_exp)}`}>{row.fuel_exp}</td>
+                    <td className={`px-8 py-5 ${getPermissionStyle(row.analytics)}`}>{row.analytics}</td>
                   </tr>
                 ))}
               </tbody>

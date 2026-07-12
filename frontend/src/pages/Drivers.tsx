@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
-import { Search, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
+import SearchInput from "../components/SearchInput";
 
 type DriverStatus = "Available" | "On Trip" | "Off Duty" | "Suspended";
 
@@ -92,9 +93,9 @@ export default function Drivers() {
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden max-w-[1600px] mx-auto gap-4 lg:gap-6">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       {/* Page Title + Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0 animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 animate-fade-in mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Drivers
@@ -106,19 +107,14 @@ export default function Drivers() {
       </div>
 
       {/* Filter Row */}
-      <div className="glass-panel p-4 flex flex-col md:flex-row gap-4 justify-between items-center shrink-0 animate-fade-in" style={{ animationDelay: '50ms' }}>
-        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+      <div className="glass-panel p-6 lg:p-8 flex flex-col md:flex-row gap-6 justify-between items-center shrink-0 animate-fade-in mb-6" style={{ animationDelay: '50ms' }}>
+        <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
           {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input
-              type="text"
-              placeholder="Search Name or License..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-4 py-2 bg-slate-50/50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent w-full sm:w-64 transition-all"
-            />
-          </div>
+          <SearchInput 
+            placeholder="Search Name or License..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
 
         {/* Add Button */}
@@ -137,14 +133,14 @@ export default function Drivers() {
           <table className="w-full text-left text-sm whitespace-nowrap">
             <thead className="sticky top-0 bg-slate-50/95 backdrop-blur z-10 border-b border-slate-200 text-slate-500 font-medium">
               <tr>
-                <th className="px-6 py-4 font-semibold">Driver</th>
-                <th className="px-6 py-4 font-semibold">License No.</th>
-                <th className="px-6 py-4 font-semibold">Category</th>
-                <th className="px-6 py-4 font-semibold">Expiry</th>
-                <th className="px-6 py-4 font-semibold">Contact</th>
-                <th className="px-6 py-4 font-semibold text-right">Trip Completion %</th>
-                <th className="px-6 py-4 font-semibold text-center">Safety Status</th>
-                <th className="px-6 py-4 font-semibold text-center">Status</th>
+                <th className="px-8 py-5 font-semibold">Driver</th>
+                <th className="px-8 py-5 font-semibold">License No.</th>
+                <th className="px-8 py-5 font-semibold">Category</th>
+                <th className="px-8 py-5 font-semibold">Expiry</th>
+                <th className="px-8 py-5 font-semibold">Contact</th>
+                <th className="px-8 py-5 font-semibold text-right">Trip Completion %</th>
+                <th className="px-8 py-5 font-semibold text-center">Safety Status</th>
+                <th className="px-8 py-5 font-semibold text-center">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -152,10 +148,10 @@ export default function Drivers() {
                 const expired = isExpired(driver.license_expiry_date);
                 return (
                   <tr key={driver.license_number} className="hover:bg-slate-50/80 transition-colors group">
-                    <td className="px-6 py-4 font-medium text-slate-800">{driver.name}</td>
-                    <td className="px-6 py-4 text-slate-600">{driver.license_number}</td>
-                    <td className="px-6 py-4 text-slate-600">{driver.license_category}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-8 py-5 font-medium text-slate-800">{driver.name}</td>
+                    <td className="px-8 py-5 text-slate-600">{driver.license_number}</td>
+                    <td className="px-8 py-5 text-slate-600">{driver.license_category}</td>
+                    <td className="px-8 py-5">
                       <span className={`flex items-center gap-2 ${expired ? 'text-red-600 font-medium' : 'text-slate-600'}`}>
                         {driver.license_expiry_date}
                         {expired && (
@@ -165,14 +161,14 @@ export default function Drivers() {
                         )}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-slate-600">{driver.contact_number}</td>
-                    <td className="px-6 py-4 text-slate-600 text-right tabular-nums">{driver.trip_completion}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-8 py-5 text-slate-600">{driver.contact_number}</td>
+                    <td className="px-8 py-5 text-slate-600 text-right tabular-nums">{driver.trip_completion}</td>
+                    <td className="px-8 py-5 text-center">
                       <span className={`inline-flex items-center justify-center px-2.5 py-1 text-xs font-semibold rounded-full border ${getStatusColor(driver.safety_status)}`}>
                         {driver.safety_status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-8 py-5 text-center">
                       <span className={`inline-flex items-center justify-center px-2.5 py-1 text-xs font-semibold rounded-full border ${getStatusColor(driver.status)}`}>
                         {driver.status}
                       </span>
@@ -182,7 +178,7 @@ export default function Drivers() {
               })}
               {filteredDrivers.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-slate-400">
+                  <td colSpan={8} className="px-8 py-12 text-center text-slate-400">
                     No drivers found matching the filters.
                   </td>
                 </tr>
