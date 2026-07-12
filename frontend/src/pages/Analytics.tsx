@@ -49,9 +49,9 @@ const revenueData = [
 
 export default function Analytics() {
   return (
-    <div className="flex flex-col h-full overflow-hidden max-w-[1600px] mx-auto gap-4 lg:gap-6 pb-6">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       {/* Page Title + Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0 animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 animate-fade-in mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Analytics
@@ -66,7 +66,7 @@ export default function Analytics() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 shrink-0">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 shrink-0 mb-2">
         {kpiCards.map((card, i) => (
           <div key={card.label} style={{ animationDelay: `${i * 40}ms` }} className="h-full">
             <KpiCard data={card} />
@@ -81,7 +81,7 @@ export default function Analytics() {
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-6">
         
         {/* LEFT COLUMN - Monthly Revenue */}
-        <div className="flex-[2] glass-panel p-5 flex flex-col shadow-sm animate-fade-in" style={{ animationDelay: '100ms' }}>
+        <div className="flex-[2] glass-panel p-6 lg:p-8 flex flex-col shadow-sm animate-fade-in" style={{ animationDelay: '100ms' }}>
           <h2 className="text-sm font-bold text-slate-800 mb-6 uppercase tracking-wider">Monthly Revenue</h2>
           <div className="flex-1 min-h-[250px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -101,7 +101,7 @@ export default function Analytics() {
         </div>
 
         {/* RIGHT COLUMN - Top Costliest Vehicles */}
-        <div className="flex-1 glass-panel p-5 flex flex-col shadow-sm animate-fade-in" style={{ animationDelay: '150ms' }}>
+        <div className="flex-1 glass-panel p-6 lg:p-8 flex flex-col shadow-sm animate-fade-in" style={{ animationDelay: '150ms' }}>
           <h2 className="text-sm font-bold text-slate-800 mb-6 uppercase tracking-wider">Top Costliest Vehicles</h2>
           
           <div className="flex-1 flex flex-col gap-6 justify-center">

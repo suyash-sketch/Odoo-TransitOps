@@ -92,9 +92,9 @@ export default function Trips() {
   const currentStep = "Draft";
 
   return (
-    <div className="flex flex-col h-full overflow-hidden max-w-[1600px] mx-auto gap-4 lg:gap-6">
+    <div className="flex flex-col h-full overflow-y-auto max-w-[1600px] mx-auto gap-6 lg:gap-8 pb-10 pr-2 lg:pr-4">
       {/* Page Title + Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0 animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 shrink-0 animate-fade-in mb-4">
         <div>
           <h1 className="text-xl font-extrabold tracking-tight text-slate-800">
             Trips
@@ -108,8 +108,8 @@ export default function Trips() {
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-6">
         
         {/* LEFT COLUMN - Create Trip form card */}
-        <div className="flex-[3] flex flex-col gap-4 animate-fade-in" style={{ animationDelay: '50ms' }}>
-          <div className="glass-panel p-6 flex flex-col h-full overflow-auto shadow-sm">
+        <div className="flex-[3] flex flex-col gap-6 animate-fade-in" style={{ animationDelay: '50ms' }}>
+          <div className="glass-panel p-6 lg:p-8 flex flex-col h-full overflow-auto shadow-sm">
             
             {/* Stepper */}
             <div className="flex items-center justify-between mb-8 relative">
@@ -247,14 +247,14 @@ export default function Trips() {
         </div>
 
         {/* RIGHT COLUMN - Live Board panel */}
-        <div className="flex-[2] flex flex-col gap-4 animate-fade-in" style={{ animationDelay: '100ms' }}>
+        <div className="flex-[2] flex flex-col gap-6 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <div className="glass-panel flex flex-col h-full shadow-sm">
             
-            <div className="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0">
+            <div className="p-5 lg:p-6 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl shrink-0">
               <h2 className="text-lg font-bold text-slate-800">Live Board</h2>
             </div>
             
-            <div className="flex-1 overflow-auto p-4 space-y-3">
+            <div className="flex-1 overflow-auto p-5 lg:p-6 space-y-4">
               {trips.map(trip => (
                 <div key={trip.id} className="bg-white border border-slate-200 rounded-xl p-4 hover:border-slate-300 hover:shadow-sm transition-all group">
                   <div className="flex items-center justify-between mb-3">
@@ -287,7 +287,7 @@ export default function Trips() {
               ))}
             </div>
             
-            <div className="p-4 border-t border-slate-100 bg-slate-50/50 rounded-b-2xl shrink-0 text-xs text-slate-500 font-medium text-center">
+            <div className="p-5 lg:p-6 border-t border-slate-100 bg-slate-50/50 rounded-b-2xl shrink-0 text-xs text-slate-500 font-medium text-center">
               On Complete: odometer → fuel log → expenses → vehicle & driver available
             </div>
             
