@@ -1,21 +1,31 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import { useAuthStore } from "./stores/authStore";
+
+function RequireAuth() {
+  const user = useAuthStore((s) => s.user);
+  if (!user) return <Navigate to="/login" replace />;
+  return <Outlet />;
+}
 
 function App() {
   return (
     <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* Future routes */}
-        <Route path="/fleet" element={<PlaceholderPage title="Fleet" />} />
-        <Route path="/drivers" element={<PlaceholderPage title="Drivers" />} />
-        <Route path="/trips" element={<PlaceholderPage title="Trips" />} />
-        <Route path="/maintenance" element={<PlaceholderPage title="Maintenance" />} />
-        <Route path="/fuel-expenses" element={<PlaceholderPage title="Fuel & Expenses" />} />
-        <Route path="/analytics" element={<PlaceholderPage title="Analytics" />} />
-        <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
+      <Route path="/login" element={<Login />} />
+      <Route element={<RequireAuth />}>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/fleet" element={<PlaceholderPage title="Fleet" />} />
+          <Route path="/drivers" element={<PlaceholderPage title="Drivers" />} />
+          <Route path="/trips" element={<PlaceholderPage title="Trips" />} />
+          <Route path="/maintenance" element={<PlaceholderPage title="Maintenance" />} />
+          <Route path="/fuel-expenses" element={<PlaceholderPage title="Fuel & Expenses" />} />
+          <Route path="/analytics" element={<PlaceholderPage title="Analytics" />} />
+          <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
+        </Route>
       </Route>
     </Routes>
   );
